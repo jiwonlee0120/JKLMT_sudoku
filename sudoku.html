@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td{
+            border: solid 1px;
+            border-collapse: collapse;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+
+    </table>
+</body>
+<script>
+    let size, values;
+    let tablePop = (values) => {
+        const table = document.querySelector("table");
+        for(let rowidx in values){
+            let tr = document.createElement("tr");
+            for(let colIdx in values[rowidx]){
+                let td = document.createElement("td");
+                td.innerHTML = values[rowidx][colIdx];
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+    }
+    let loadJson = () =>{
+        const xmlHTTP = new XMLHttpRequest();
+        xmlHTTP.onload = function(){
+            let output = JSON.parse(this.responseText)[0];
+            console.log(output);
+            size = output.size;
+            values = output.values;
+            tablePop(values);
+            if(!validRow(values, size)) console.log("wrong Row");
+            if(!validCol(values, size)) console.log("wrong Col");
+            validSudoku(size, values);
+            
+        }
+        xmlHTTP.open("GET","./source.json",true);
+        xmlHTTP.send();
+    }
+    loadJson();
+
+    function validRow(values, size){
+        for(let i=0; i<size; i++){
+            let arr = [];
+            for(let j=0; j<size; j++){
+                if(arr.includes(values[i][j])){
+                    return false;
+                }else{
+                    arr.push(values[i][j]);
+                }
+            }
+        }
+        return true;
+    }
+
+    function validCol(values, size){
+        for(let i=0; i<size; i++){
+            let arr = [];
+            for(let j=0; j<size; j++){
+                if(arr.includes(values[j][i])){
+                    return false;
+                }else{
+                    arr.push(values[j][i]);
+                }
+            }
+        }
+        return true;
+    }
+
+    function validBox(rowIdx, colIdx, values, size){
+        rowIdx = Math.floor(rowIdx / Math.sqrt(size));
+        colIdx = Math.floor(colIdx / Math.sqrt(size));
+        let arr = [];
+        for(let i = 0; i < Math.sqrt(size); i++){
+            for(let j = 0; j < Math.sqrt(size); j++){
+                let x = i + (Math.sqrt(size) * rowIdx);
+                let y = j + (Math.sqrt(size) * colIdx);
+                if(values[x][y] != 0){
+                    if(arr.includes(values[x][y])){
+                        return false;
+                    }else{
+                        arr.push(values[x][y]);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    function validSudoku(values, size){
+        let flag = false;
+        for(let i=0; i<size; i++){
+            for(let j=0; j<size; j++){
+                if(validBox(i, j, values, size)){
+                    console.log("wrong box");
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag) break;
+        }
+        if(!flag) console.log("right box");
+    }
+
+    
+   
+
+    
+</script>
+</html>
