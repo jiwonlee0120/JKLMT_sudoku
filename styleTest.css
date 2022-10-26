@@ -16,11 +16,11 @@ column-gap: 12vh;
 }
 
 h1 {
-font-size: 54px;
+font-size: 62px;
 }
 
 h3 {
-font-size: 26px;
+font-size: 36px;
 }
 
 h1, h3 {
@@ -35,8 +35,8 @@ font-size: 18px;
 }
 
 h5{
-margin-left: 2vh;
-font-size: 15px;
+margin-left: 1vh;
+font-size: 18px;
 }
 
 h4, h5{
@@ -46,7 +46,7 @@ letter-spacing: 1.5px;
 
 h6{
 color: rgb(247, 220, 132);
-margin-left: 4vh;
+margin-left: 3vh;
 width: 30vh;
 font-size: 15px;
 }
@@ -88,7 +88,7 @@ color: #010a01;
 }
 
 .container {
-width: 35%;
+width: 32%;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -140,7 +140,7 @@ justify-content: center;
   row-gap: 2px;
   background-color: #010a01;
   height: 100vh;
-  width: 25%;
+  width: 23%;
 }
 
 .accordion {
