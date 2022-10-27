@@ -1,3 +1,5 @@
+<!-- Jay, Kathleen, Lucas, Shotaro, Masashi -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +24,6 @@
         <div class="btn" id="btn">
             <button type="button" id="play" onClick="window.location.reload();">PLAY<i class="fa-solid fa-angle-right"></i></button>
             <button type="button" id="validate">VALIDATE<i class="fa-solid fa-angle-right"></i></button>
-            <button type="button" id="clear">CLEAR<i class="fa-solid fa-angle-right"></i></button>
         </div>
     </div>
     <div class="sudoku">
@@ -110,18 +111,11 @@
 
         
         const validate = document.querySelector("#validate");
-        const clear = document.querySelector("#clear");
         
         validate.addEventListener('click',check);
-        clear.addEventListener('click',reset);
+    
 
 
-        function reset() {
-            let tdIn = document.querySelector(".tdIn");
-            let trIn = document.querySelector(".trIn");
-            tdIn.classList.remove('tdIn');
-            trIn.classList.remove('trIn');
-        }
         
         // check something
         function check() {
@@ -191,8 +185,10 @@
             }
             if (checkFlag) {
                 h3.textContent = "Correct";
+                h3.style.color = "green";
             } else {
                 h3.textContent = "Incorrect";
+                h3.style.color = "red";
             }
         }
         function valArray(array){
